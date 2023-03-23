@@ -14,17 +14,24 @@ model Book {
   id        String     @default(cuid()) @id
   title     String
   author    String
-  read Boolean @default(false)
-  user    User?   @relation(fields: [userId], references: [id])
-  userId  String?
+  thoughts  String?
+  read      Read @default(NR)
+  user      User?   @relation(fields: [userId], references: [id])
+  userId    String?
 }
 
 model User {
   id            String       @default(cuid()) @id
-  name          String?
+  name          String
   email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  createdAt     DateTime  @createdAt @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   books         Book[]
   @@map(name: "users")
+}
+
+enum Read {
+  NR
+  READING
+  READ
 }
