@@ -6,11 +6,11 @@ export type BookProps = {
   id: string;
   title: string;
   author: string;
+  thoughts: string;
   read: string;
   user: {
     name: string;
   } | null;
-  thoughts: string;
 };
 
 const Book: React.FC<{ book: BookProps }> = ({ book }) => {
