@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Router from "next/router";
+import Select from "react-select";
 
+const options = [
+  { label: "Read", value: "READ" },
+  { label: "Not Read", value: "NR" },
+  { label: "Reading", value: "READING" },
+];
 const Draft: React.FC = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [thoughts, setThoughts] = useState("");
+  const [readstatus, setReadStatus] = useState(null);
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const body = { title, author, thoughts };
+      const body = { title, author, readstatus };
       await fetch("api/post", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      await Router.push("/drafts");
+      await Router.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -43,10 +49,10 @@ const Draft: React.FC = () => {
           />
           <textarea
             cols={50}
-            onChange={(e) => setThoughts(e.target.value)}
-            placeholder="Thoughts"
-            rows={4}
-            value={thoughts}
+            onChange={(e) => setReadStatus(e.target.value)}
+            placeholder="Read status"
+            rows={1}
+            value={readstatus}
           />
           <input disabled={!author || !title} type="submit" value="Create" />
           <a className="back" href="#" onClick={() => Router.push("/")}>

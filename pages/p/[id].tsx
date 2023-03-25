@@ -1,8 +1,10 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 import ReactMarkdown from "react-markdown";
+import Router from "next/router";
 import Layout from "../../components/Layout";
 import { BookProps } from "../../components/Book";
+import { useSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -12,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
     include: {
       user: {
-        select: { name: true },
+        select: { name: true, email: true },
       },
     },
   });
@@ -21,10 +23,24 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
+async function publishBook(id: string): Promise<void> {
+  await fetch(`/api/publish/${id}`, {
+    method: "POST",
+  });
+  await Router.push("/");
+}
+
 const Book: React.FC<BookProps> = (props) => {
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <div>Authenticating...</div>;
+  }
+  const userHasValidSession = Boolean(session);
+  const bookBelongsToUser = session?.user?.email === props.user?.email;
+
   let title = props.title;
   let author = props.author;
-  const status = props.read ? props.read : "Test";
+  let read = props.read;
 
   return (
     <Layout>
@@ -32,7 +48,10 @@ const Book: React.FC<BookProps> = (props) => {
         <h2>{title}</h2>
         <p>By {author || "Unknown"}</p>
         <small>Status: {status}</small>
-        <ReactMarkdown children={props.thoughts} />
+        <ReactMarkdown children={props.read} />
+        {userHasValidSession && bookBelongsToUser && (
+          <button onClick={() => publishBook(props.id)}>Publish</button>
+        )}
       </div>
       <style jsx>{`
         .page {
