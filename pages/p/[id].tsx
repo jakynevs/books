@@ -29,6 +29,13 @@ async function publishBook(id: string): Promise<void> {
   });
   await Router.push("/");
 }
+async function deleteBook(id: string): Promise<void> {
+  debugger;
+  await fetch(`/api/book/${id}`, {
+    method: "DELETE",
+  });
+  Router.push("/");
+}
 
 const Book: React.FC<BookProps> = (props) => {
   const { data: session, status } = useSession();
@@ -38,6 +45,8 @@ const Book: React.FC<BookProps> = (props) => {
   const userHasValidSession = Boolean(session);
   const bookBelongsToUser = session?.user?.email === props.user?.email;
 
+  let id = props.id;
+  console.log(id);
   let title = props.title;
   let author = props.author;
   let read = props.read;
@@ -50,6 +59,9 @@ const Book: React.FC<BookProps> = (props) => {
         <ReactMarkdown children={read} />
         {userHasValidSession && bookBelongsToUser && (
           <button onClick={() => publishBook(props.id)}>Publish</button>
+        )}
+        {userHasValidSession && bookBelongsToUser && (
+          <button onClick={() => deleteBook(id)}>Delete</button>
         )}
       </div>
       <style jsx>{`
