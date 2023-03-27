@@ -47,7 +47,6 @@ const Book: React.FC<BookProps> = (props) => {
       <div>
         <h2>{title}</h2>
         <p>By {author || "Unknown"}</p>
-        <small>Status: {status}</small>
         <ReactMarkdown children={read} />
         {userHasValidSession && bookBelongsToUser && (
           <button onClick={() => publishBook(props.id)}>Publish</button>
