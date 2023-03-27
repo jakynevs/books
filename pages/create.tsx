@@ -9,18 +9,28 @@ const options = [
   { label: "Reading", value: "READING" },
 ];
 const Draft: React.FC = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [readstatus, setReadStatus] = useState(null);
+  const [formData, setFormData] = useState({
+    title: "",
+    author: "",
+    read: "",
+  });
 
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
+  }
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
-      const body = { title, author, readstatus };
       await fetch("api/post", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(formData),
       });
       await Router.push("/");
     } catch (error) {
@@ -34,27 +44,36 @@ const Draft: React.FC = () => {
         <form onSubmit={submitData}>
           <h1>New Book</h1>
           <input
+            name="title"
             autoFocus
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={handleChange}
             placeholder="Title"
             type="text"
-            value={title}
+            value={formData.title}
           />
           <input
+            name="author"
             autoFocus
-            onChange={(e) => setAuthor(e.target.value)}
+            onChange={handleChange}
             placeholder="Author"
             type="text"
-            value={author}
+            value={formData.author}
           />
-          <textarea
-            cols={50}
-            onChange={(e) => setReadStatus(e.target.value)}
-            placeholder="Read status"
-            rows={1}
-            value={readstatus}
+          <label>
+            Reading status:
+            <select name="read" value={formData.read} onChange={handleChange}>
+              <option value="READING">Reading</option>
+              <option selected value="NR">
+                Not read
+              </option>
+              <option value="READ">Read</option>
+            </select>
+          </label>
+          <input
+            disabled={!formData.author || !formData.title}
+            type="submit"
+            value="Create"
           />
-          <input disabled={!author || !title} type="submit" value="Create" />
           <a className="back" href="#" onClick={() => Router.push("/")}>
             or Cancel
           </a>

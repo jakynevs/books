@@ -6,14 +6,14 @@ import prisma from "../../../lib/prisma";
 // Required fields in body: author
 // Optional fields in body: content
 export default async function handle(req, res) {
-  const { title, author, thoughts } = req.body;
+  const { title, author, read } = req.body;
 
   const session = await getSession({ req });
   const result = await prisma.book.create({
     data: {
       title: title,
       author: author,
-      thoughts: thoughts,
+      read: read,
       user: { connect: { email: session?.user?.email } },
     },
   });
