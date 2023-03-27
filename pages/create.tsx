@@ -8,7 +8,7 @@ const options = [
   { label: "Not Read", value: "NR" },
   { label: "Reading", value: "READING" },
 ];
-const Draft: React.FC = () => {
+const Create: React.FC = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -111,4 +111,4 @@ const Draft: React.FC = () => {
   );
 };
 
-export default Draft;
+export default Create;
