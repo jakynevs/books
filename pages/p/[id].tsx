@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { GetServerSideProps } from "next";
 import ReactMarkdown from "react-markdown";
 import Router from "next/router";
@@ -23,14 +24,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
-async function publishBook(id: string): Promise<void> {
-  await fetch(`/api/publish/${id}`, {
-    method: "POST",
-  });
-  await Router.push("/");
-}
 async function deleteBook(id: string): Promise<void> {
-  debugger;
   await fetch(`/api/book/${id}`, {
     method: "DELETE",
   });
@@ -46,7 +40,6 @@ const Book: React.FC<BookProps> = (props) => {
   const bookBelongsToUser = session?.user?.email === props.user?.email;
 
   let id = props.id;
-  console.log(id);
   let title = props.title;
   let author = props.author;
   let read = props.read;
@@ -57,9 +50,16 @@ const Book: React.FC<BookProps> = (props) => {
         <h2>{title}</h2>
         <p>By {author || "Unknown"}</p>
         <ReactMarkdown children={read} />
-        {userHasValidSession && bookBelongsToUser && (
-          <button onClick={() => publishBook(props.id)}>Publish</button>
-        )}
+        <Link
+          href={{
+            pathname: "/edit",
+            query: { id, title, author, read },
+          }}
+        >
+          <button>
+            <a>Edit</a>
+          </button>
+        </Link>
         {userHasValidSession && bookBelongsToUser && (
           <button onClick={() => deleteBook(id)}>Delete</button>
         )}
