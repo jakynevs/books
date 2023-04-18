@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 const options = [
   { label: "Read", value: "READ" },
   { label: "Not Read", value: "NR" },
   { label: "Reading", value: "READING" },
 ];
+
 const Edit: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
-    title: "",
-    author: "",
-    read: "",
+    title: router.query.title,
+    author: router.query.author,
+    read: router.query.read,
   });
 
   function handleChange(e) {
