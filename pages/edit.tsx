@@ -11,6 +11,7 @@ const options = [
 const Edit: React.FC = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
+    id: router.query.id,
     title: router.query.title,
     author: router.query.author,
     read: router.query.read,
@@ -25,10 +26,12 @@ const Edit: React.FC = () => {
       };
     });
   }
+
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const id = formData.id;
     try {
-      await fetch("api/post", {
+      await fetch(`api/book/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -71,9 +74,10 @@ const Edit: React.FC = () => {
             </select>
           </label>
           <input
+            // disabled if no change
             disabled={!formData.author || !formData.title}
             type="submit"
-            value="Create"
+            value="Update"
           />
           <a className="back" href="#" onClick={() => Router.push("/")}>
             or Cancel
