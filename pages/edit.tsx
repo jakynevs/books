@@ -16,6 +16,7 @@ const Edit: React.FC = () => {
     author: router.query.author,
     read: router.query.read,
   });
+  const [disabled, setDisabled] = useState(true);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -28,6 +29,7 @@ const Edit: React.FC = () => {
   }
 
   const submitData = async (e: React.SyntheticEvent) => {
+    setDisabled(true);
     e.preventDefault();
     const id = formData.id;
     try {
@@ -73,12 +75,16 @@ const Edit: React.FC = () => {
               <option value="READ">Read</option>
             </select>
           </label>
-          <input
-            // disabled if no change
-            disabled={!formData.author || !formData.title}
+          <button
+            disabled={
+              formData.title === router.query.title &&
+              formData.author === router.query.author &&
+              formData.read === router.query.read
+            }
             type="submit"
-            value="Update"
-          />
+          >
+            Update
+          </button>
           <a className="back" href="#" onClick={() => Router.push("/")}>
             or Cancel
           </a>
