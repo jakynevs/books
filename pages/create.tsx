@@ -3,11 +3,6 @@ import Layout from "../components/Layout";
 import Router from "next/router";
 import Select from "react-select";
 
-const options = [
-  { label: "Read", value: "READ" },
-  { label: "Not Read", value: "NR" },
-  { label: "Reading", value: "READING" },
-];
 const Create: React.FC = () => {
   const [formData, setFormData] = useState({
     title: "",

@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Router, { useRouter } from "next/router";
 
-const options = [
-  { label: "Read", value: "READ" },
-  { label: "Not Read", value: "NR" },
-  { label: "Reading", value: "READING" },
-];
-
 const Edit: React.FC = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -70,7 +64,7 @@ const Edit: React.FC = () => {
             <select name="read" value={formData.read} onChange={handleChange}>
               <option value="READING">Reading</option>
               <option selected value="NR">
-                Not read
+                Yet to read
               </option>
               <option value="READ">Read</option>
             </select>

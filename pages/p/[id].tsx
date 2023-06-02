@@ -33,6 +33,19 @@ async function deleteBook(id: string): Promise<void> {
 
 const Book: React.FC<BookProps> = (props) => {
   const { data: session, status } = useSession();
+  const setReadStatus = (str) => {
+    if (str == "READ") {
+      str = "Read";
+    }
+    if (str == "NR") {
+      str = "Yet to read";
+    }
+    if (str == "READING") {
+      str = "Reading";
+    }
+    return str;
+  };
+
   if (status === "loading") {
     return <div>Authenticating...</div>;
   }
