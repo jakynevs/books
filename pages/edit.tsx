@@ -12,6 +12,10 @@ const Edit: React.FC = () => {
   });
   const [disabled, setDisabled] = useState(true);
 
+  const onClick = () => {
+    setDisabled(true);
+  };
+
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prevFormData) => {
@@ -23,8 +27,8 @@ const Edit: React.FC = () => {
   }
 
   const submitData = async (e: React.SyntheticEvent) => {
-    setDisabled(true);
     e.preventDefault();
+    setDisabled(true);
     const id = formData.id;
     try {
       await fetch(`api/book/${id}`, {
@@ -75,7 +79,7 @@ const Edit: React.FC = () => {
               formData.author === router.query.author &&
               formData.read === router.query.read
             }
-            type="submit"
+            onClick={onClick}
           >
             Update
           </button>
