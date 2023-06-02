@@ -62,7 +62,7 @@ const Book: React.FC<BookProps> = (props) => {
       <div>
         <h2>{title}</h2>
         <p>By {author || "Unknown"}</p>
-        <ReactMarkdown children={read} />
+        <p>{setReadStatus(read)}</p>
         <Link
           href={{
             pathname: "/edit",
