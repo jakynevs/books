@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Router, { useRouter } from "next/router";
+import { useLocalStorage } from "../components/useLocalStorage";
 
 const Edit: React.FC = () => {
   const router = useRouter();
@@ -26,6 +27,26 @@ const Edit: React.FC = () => {
     });
   }
 
+  useEffect(() => {
+    if (!formData.id) {
+      const getLocalFormData = window.localStorage.getItem("formValues");
+      const savedValues = JSON.parse(getLocalFormData);
+      setFormData(() => {
+        return {
+          id: savedValues.id,
+          title: savedValues.title,
+          author: savedValues.author,
+          read: savedValues.read,
+        };
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("formValues", JSON.stringify(formData));
+    window.localStorage.removeItem("test");
+  });
+
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setDisabled(true);
@@ -36,6 +57,7 @@ const Edit: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      window.localStorage.removeItem("formValues");
       await Router.push("/");
     } catch (error) {
       console.log(error);
