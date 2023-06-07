@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Router, { useRouter } from "next/router";
-import { useLocalStorage } from "../components/useLocalStorage";
 
 const Edit: React.FC = () => {
   const router = useRouter();

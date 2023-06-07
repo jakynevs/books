@@ -7,7 +7,7 @@ const Create: React.FC = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
-    read: "",
+    read: "NR",
   });
 
   function handleChange(e) {
