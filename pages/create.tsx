@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Router from "next/router";
-import Select from "react-select";
 
 const Create: React.FC = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
     read: "NR",
+    thoughts: "",
   });
+
+  const [isRead, setIsRead] = useState(false);
 
   function handleChange(e) {
     const { name, value } = e.target;
+    bookRead(name, value);
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -32,6 +35,11 @@ const Create: React.FC = () => {
       console.log(error);
     }
   };
+
+  function bookRead(read, READ) {
+    if (read != "read") return;
+    READ === "READ" ? setIsRead(true) : setIsRead(false);
+  }
 
   return (
     <Layout>
@@ -64,6 +72,15 @@ const Create: React.FC = () => {
               <option value="READ">Read</option>
             </select>
           </label>
+          {isRead && (
+            <input
+              name="thoughts"
+              onChange={handleChange}
+              placeholder="Thoughts..."
+              type="text"
+              value={formData.thoughts}
+            />
+          )}
           <input
             disabled={!formData.author || !formData.title}
             type="submit"
