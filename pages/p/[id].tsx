@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
-import ReactMarkdown from "react-markdown";
 import Router from "next/router";
 import Layout from "../../components/Layout";
 import { BookProps } from "../../components/Book";
@@ -56,6 +55,7 @@ const Book: React.FC<BookProps> = (props) => {
   let title = props.title;
   let author = props.author;
   let read = props.read;
+  let thoughts = props.thoughts;
 
   return (
     <Layout>
@@ -63,6 +63,8 @@ const Book: React.FC<BookProps> = (props) => {
         <h2>{title}</h2>
         <p>By {author || "Unknown"}</p>
         <p>{setReadStatus(read)}</p>
+        {thoughts && <p> {thoughts}</p>}
+        <p></p>
         <Link
           href={{
             pathname: "/edit",
