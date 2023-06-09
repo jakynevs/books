@@ -9,8 +9,10 @@ const Edit: React.FC = () => {
     title: router.query.title,
     author: router.query.author,
     read: router.query.read,
+    thoughts: router.query.thoughts,
   });
   const [disabled, setDisabled] = useState(true);
+  const [isRead, setIsRead] = useState(() => bookRead(formData.read));
 
   const onClick = () => {
     setDisabled(true);
@@ -18,6 +20,7 @@ const Edit: React.FC = () => {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    name === "read" && setIsRead(bookRead(value));
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
@@ -36,6 +39,7 @@ const Edit: React.FC = () => {
           title: savedValues.title,
           author: savedValues.author,
           read: savedValues.read,
+          thoughts: savedValues.thoughts,
         };
       });
     }
@@ -43,7 +47,6 @@ const Edit: React.FC = () => {
 
   useEffect(() => {
     window.localStorage.setItem("formValues", JSON.stringify(formData));
-    window.localStorage.removeItem("test");
   });
 
   const submitData = async (e: React.SyntheticEvent) => {
@@ -62,6 +65,10 @@ const Edit: React.FC = () => {
       console.log(error);
     }
   };
+
+  function bookRead(read) {
+    return read === "READ" ? true : false;
+  }
 
   return (
     <Layout>
@@ -94,11 +101,21 @@ const Edit: React.FC = () => {
               <option value="READ">Read</option>
             </select>
           </label>
+          {isRead && (
+            <input
+              name="thoughts"
+              onChange={handleChange}
+              placeholder="Thoughts..."
+              type="text"
+              value={formData.thoughts}
+            />
+          )}
           <button
             disabled={
               formData.title === router.query.title &&
               formData.author === router.query.author &&
-              formData.read === router.query.read
+              formData.read === router.query.read &&
+              formData.thoughts === router.query.thoughts
             }
             onClick={onClick}
           >

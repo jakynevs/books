@@ -68,7 +68,7 @@ const Book: React.FC<BookProps> = (props) => {
         <Link
           href={{
             pathname: "/edit",
-            query: { id, title, author, read },
+            query: { id, title, author, read, thoughts },
           }}
         >
           <button>

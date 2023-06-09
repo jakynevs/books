@@ -7,9 +7,10 @@ export default async function handle(req, res) {
       where: { id: bookId },
     });
     res.json(book);
+    return;
   }
   if (req.method === "PUT") {
-    const { id, title, author, read } = req.body;
+    const { id, title, author, read, thoughts } = req.body;
     const updateBook = await prisma.book.update({
       where: {
         id: id,
@@ -19,9 +20,11 @@ export default async function handle(req, res) {
         title: title,
         author: author,
         read: read,
+        thoughts: thoughts,
       },
     });
     res.json(updateBook);
+    return;
   } else {
     throw new Error(
       `The HTTP ${req.method} method is not supported at this route.`
