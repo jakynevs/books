@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import { BookProps } from "../../components/Book";
 import { useSession } from "next-auth/react";
 import prisma from "../../lib/prisma";
+import { Rate } from "antd";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const book = await prisma.book.findUnique({
@@ -65,7 +66,15 @@ const Book: React.FC<BookProps> = (props) => {
         <p>By {author || "Unknown"}</p>
         <p>{setReadStatus(read)}</p>
         {thoughts && <p> {thoughts}</p>}
-        {rating}
+        {rating ? (
+          <Rate
+            count={4}
+            allowClear={true}
+            value={rating}
+            style={{ color: "#96e7f1" }}
+            disabled={true}
+          />
+        ) : null}
         <p></p>
         <Link
           href={{
