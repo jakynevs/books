@@ -16,6 +16,7 @@ model Book {
   read      Read      @default(NR)
   user      User?     @relation(fields:[userId], references:[id])
   userId    String?
+  rating    Float?
   }
 
 model Account {

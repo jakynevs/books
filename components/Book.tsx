@@ -1,12 +1,12 @@
 import React from "react";
 import Router from "next/router";
-import ReactMarkdown from "react-markdown";
 
 export type BookProps = {
   id: string;
   title: string;
   author: string;
   thoughts: string;
+  rating: Float32Array;
   read: string;
   user: {
     name: string;

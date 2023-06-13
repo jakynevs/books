@@ -10,7 +10,7 @@ export default async function handle(req, res) {
     return;
   }
   if (req.method === "PUT") {
-    const { id, title, author, read, thoughts } = req.body;
+    const { id, title, author, read, rating, thoughts } = req.body;
     const updateBook = await prisma.book.update({
       where: {
         id: id,
@@ -20,6 +20,7 @@ export default async function handle(req, res) {
         title: title,
         author: author,
         read: read,
+        rating: rating,
         thoughts: thoughts,
       },
     });

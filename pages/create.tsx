@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
 import Router from "next/router";
+import { Rate } from "antd";
 
 const Create: React.FC = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
     read: "NR",
+    rating: 0,
     thoughts: "",
   });
 
@@ -22,6 +24,17 @@ const Create: React.FC = () => {
       };
     });
   }
+
+  function handleStarChange(e) {
+    const value = e;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        rating: value,
+      };
+    });
+  }
+
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
@@ -73,13 +86,22 @@ const Create: React.FC = () => {
             </select>
           </label>
           {isRead && (
-            <input
-              name="thoughts"
-              onChange={handleChange}
-              placeholder="Thoughts..."
-              type="text"
-              value={formData.thoughts}
-            />
+            <a>
+              <Rate
+                count={4}
+                allowClear={true}
+                style={{ color: "#96e7f1" }}
+                onChange={handleStarChange}
+                value={formData.rating}
+              />
+              <input
+                name="thoughts"
+                onChange={handleChange}
+                placeholder="Thoughts..."
+                type="text"
+                value={formData.thoughts}
+              />
+            </a>
           )}
           <input
             disabled={!formData.author || !formData.title}

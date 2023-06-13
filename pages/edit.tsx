@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Router, { useRouter } from "next/router";
+import { Rate } from "antd";
 
 const Edit: React.FC = () => {
   const router = useRouter();
@@ -9,6 +10,7 @@ const Edit: React.FC = () => {
     title: router.query.title,
     author: router.query.author,
     read: router.query.read,
+    rating: Number(router.query.rating),
     thoughts: router.query.thoughts,
   });
   const [disabled, setDisabled] = useState(true);
@@ -29,6 +31,16 @@ const Edit: React.FC = () => {
     });
   }
 
+  function handleStarChange(e) {
+    const value = e;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        rating: value,
+      };
+    });
+  }
+
   useEffect(() => {
     if (!formData.id) {
       const getLocalFormData = window.localStorage.getItem("formValues");
@@ -39,6 +51,7 @@ const Edit: React.FC = () => {
           title: savedValues.title,
           author: savedValues.author,
           read: savedValues.read,
+          rating: savedValues.rating,
           thoughts: savedValues.thoughts,
         };
       });
@@ -102,19 +115,30 @@ const Edit: React.FC = () => {
             </select>
           </label>
           {isRead && (
-            <input
-              name="thoughts"
-              onChange={handleChange}
-              placeholder="Thoughts..."
-              type="text"
-              value={formData.thoughts}
-            />
+            <a>
+              <Rate
+                count={4}
+                allowClear={true}
+                style={{ color: "#96e7f1" }}
+                onChange={handleStarChange}
+                defaultValue={0}
+                value={formData.rating}
+              />
+              <input
+                name="thoughts"
+                onChange={handleChange}
+                placeholder="Thoughts..."
+                type="text"
+                value={formData.thoughts}
+              />
+            </a>
           )}
           <button
             disabled={
               formData.title === router.query.title &&
               formData.author === router.query.author &&
               formData.read === router.query.read &&
+              formData.rating === Number(router.query.rating) &&
               formData.thoughts === router.query.thoughts
             }
             onClick={onClick}

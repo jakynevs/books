@@ -55,6 +55,7 @@ const Book: React.FC<BookProps> = (props) => {
   let title = props.title;
   let author = props.author;
   let read = props.read;
+  let rating = Number(props.rating);
   let thoughts = props.thoughts;
 
   return (
@@ -64,11 +65,12 @@ const Book: React.FC<BookProps> = (props) => {
         <p>By {author || "Unknown"}</p>
         <p>{setReadStatus(read)}</p>
         {thoughts && <p> {thoughts}</p>}
+        {rating}
         <p></p>
         <Link
           href={{
             pathname: "/edit",
-            query: { id, title, author, read, thoughts },
+            query: { id, title, author, read, rating, thoughts },
           }}
         >
           <button>
