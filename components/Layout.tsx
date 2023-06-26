@@ -47,4 +47,4 @@ const Layout: React.FC<Props> = (props) => (
   </div>
 );
 
-export default Layout;
+export default React.memo(Layout);

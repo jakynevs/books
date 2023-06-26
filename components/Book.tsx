@@ -29,4 +29,4 @@ const Book: React.FC<{ book: BookProps }> = ({ book }) => {
   );
 };
 
-export default Book;
+export default React.memo(Book);
