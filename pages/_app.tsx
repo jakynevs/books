@@ -2,6 +2,7 @@
 
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
+// import "pages_app.less";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
