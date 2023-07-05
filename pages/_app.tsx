@@ -1,4 +1,3 @@
-import "../pages/App.less";
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 
