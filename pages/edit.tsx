@@ -55,11 +55,13 @@ const Edit: React.FC = () => {
           thoughts: savedValues.thoughts,
         };
       });
+      setIsRead(savedValues.read);
     }
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem("formValues", JSON.stringify(formData));
+    window.localStorage.setItem("isRead", JSON.stringify(isRead));
   });
 
   const submitData = async (e: React.SyntheticEvent) => {
