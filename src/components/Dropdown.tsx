@@ -4,7 +4,7 @@ import {
   StyledSelect,
   StyledOption,
   StyledLabel,
-} from "./styles/styles.js";
+} from "../components/styles/styles";
 
 export function Dropdown(props) {
   return (

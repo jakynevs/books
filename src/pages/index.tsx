@@ -2,7 +2,7 @@ import React from "react";
 import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Book, { BookProps } from "../components/Book";
-import prisma from "../lib/prisma";
+import prisma from "../../lib/prisma";
 
 export const getStaticProps: GetStaticProps = async () => {
   const books = await prisma.book.findMany({

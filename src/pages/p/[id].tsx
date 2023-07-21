@@ -5,7 +5,7 @@ import Router from "next/router";
 import Layout from "../../components/Layout";
 import { BookProps } from "../../components/Book";
 import { useSession } from "next-auth/react";
-import prisma from "../../lib/prisma";
+import prisma from "../../../lib/prisma";
 import { Rate } from "antd";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
@@ -50,7 +50,7 @@ const Book: React.FC<BookProps> = (props) => {
     return <div>Authenticating...</div>;
   }
   const userHasValidSession = Boolean(session);
-  const bookBelongsToUser = session?.user?.email === props.user?.email;
+  // const bookBelongsToUser = session?.user?.email === props.user?.email;
 
   let id = props.id;
   let title = props.title;
@@ -86,7 +86,7 @@ const Book: React.FC<BookProps> = (props) => {
             <a>Edit</a>
           </button>
         </Link>
-        {userHasValidSession && bookBelongsToUser && (
+        {userHasValidSession && (
           <button onClick={() => deleteBook(id)}>Delete</button>
         )}
       </div>
