@@ -24,7 +24,7 @@ type Props = {
 
 const Library: React.FC<Props> = (props) => {
   return (
-    <Layout>
+    <Layout children={""}>
       <div className="page">
         <h1>Books</h1>
         <main>
