@@ -8,8 +8,13 @@ type Props = {
 const Layout: React.FC<Props> = (props) => (
   <div>
     <Header />
-    <div className="layout">{props.children}</div>
     <style jsx global>{`
+      h1 {
+        font-size: 20px;
+      }
+      h2 {
+        font-size: 30px;
+      }
       html {
         box-sizing: border-box;
       }
@@ -38,12 +43,40 @@ const Layout: React.FC<Props> = (props) => (
       button {
         cursor: pointer;
       }
-    `}</style>
-    <style jsx>{`
       .layout {
         padding: 0 2rem;
       }
+      button {
+        background: #ececec;
+        border: 0;
+        border-radius: 0.125rem;
+        padding: 1rem 2rem;
+      }
+
+      button + button {
+        margin-left: 1rem;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border-radius: 0.25rem;
+        border: 0.125rem solid rgba(0, 0, 0, 0.2);
+      }
+
+      input[type="submit"] {
+        background: #ececec;
+        border: 0;
+        padding: 1rem 2rem;
+      }
+
+      .back {
+        margin-left: 1rem;
+      }
     `}</style>
+    <div className="layout">{props.children}</div>
   </div>
 );
 
