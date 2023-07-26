@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import Layout from "../components/Layout";
 import Book, { BookProps } from "../components/Book";
 import prisma from "../../lib/prisma";
+import globalStyles from "../components/styles/global";
 
 export const getStaticProps: GetStaticProps = async () => {
   const books = await prisma.book.findMany({
@@ -24,7 +25,7 @@ type Props = {
 
 const Library: React.FC<Props> = (props) => {
   return (
-    <Layout children={""}>
+    <Layout>
       <div className="page">
         <h1>Books</h1>
         <main>
@@ -35,20 +36,6 @@ const Library: React.FC<Props> = (props) => {
           ))}
         </main>
       </div>
-      <style jsx>{`
-        .book {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .book:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .book + .book {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   );
 };

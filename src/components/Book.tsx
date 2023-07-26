@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import { Rate } from "antd";
+import globalStyles from "../components/styles/global";
 
 export type BookProps = {
   id: string;
@@ -31,12 +32,10 @@ const Book: React.FC<{ book: BookProps }> = ({ book }) => {
           />
         </div>
       )}
-      <style jsx>{`
-        div {
-          color: inherit;
-          padding: 2rem;
-        }
-      `}</style>
+
+      <style jsx global>
+        {globalStyles}
+      </style>
     </div>
   );
 };
