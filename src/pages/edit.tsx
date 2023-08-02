@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Router, { useRouter } from "next/router";
 import { Rate } from "antd";
+import globalStyles from "../components/styles/global";
 
 const Edit: React.FC = () => {
   const router = useRouter();
@@ -87,71 +88,77 @@ const Edit: React.FC = () => {
 
   return (
     <Layout>
-      <div>
-        <form onSubmit={submitData}>
-          <h1>Edit Book</h1>
-          <input
-            name="title"
-            autoFocus
-            onChange={handleChange}
-            placeholder="Title"
-            type="text"
-            value={formData.title}
-          />
-          <input
-            name="author"
-            autoFocus
-            onChange={handleChange}
-            placeholder="Author"
-            type="text"
-            value={formData.author}
-          />
-          <label>
-            Reading status:
-            <select name="read" value={formData.read} onChange={handleChange}>
-              <option value="READING">Reading</option>
-              <option selected value="NR">
-                Yet to read
-              </option>
-              <option value="READ">Read</option>
-            </select>
-          </label>
-          {isRead && (
-            <a>
-              <Rate
-                count={4}
-                allowClear={true}
-                style={{ color: "#96e7f1" }}
-                onChange={handleStarChange}
-                defaultValue={0}
-                value={formData.rating}
-              />
-              <input
-                name="thoughts"
-                onChange={handleChange}
-                placeholder="Thoughts..."
-                type="text"
-                value={formData.thoughts}
-              />
+      <div className="pageParent">
+        <div className="pageChild">
+          <form onSubmit={submitData}>
+            <h1>Edit Book</h1>
+            <input
+              name="title"
+              autoFocus
+              onChange={handleChange}
+              placeholder="Title"
+              type="text"
+              value={formData.title}
+            />
+            <input
+              name="author"
+              autoFocus
+              onChange={handleChange}
+              placeholder="Author"
+              type="text"
+              value={formData.author}
+            />
+            <label>
+              Reading status:
+              <select name="read" value={formData.read} onChange={handleChange}>
+                <option value="READING">Reading</option>
+                <option selected value="NR">
+                  Yet to read
+                </option>
+                <option value="READ">Read</option>
+              </select>
+            </label>
+            {isRead && (
+              <a>
+                <Rate
+                  count={4}
+                  allowClear={true}
+                  style={{ color: "#FF69B4" }}
+                  onChange={handleStarChange}
+                  defaultValue={0}
+                  value={formData.rating}
+                />
+                <input
+                  name="thoughts"
+                  onChange={handleChange}
+                  placeholder="Thoughts..."
+                  type="text"
+                  value={formData.thoughts}
+                />
+              </a>
+            )}
+            <button
+              disabled={
+                formData.title === router.query.title &&
+                formData.author === router.query.author &&
+                formData.read === router.query.read &&
+                formData.rating === Number(router.query.rating) &&
+                formData.thoughts === router.query.thoughts
+              }
+              onClick={onClick}
+            >
+              Update
+            </button>
+            <a className="back" href="#" onClick={() => Router.push("/")}>
+              or Cancel
             </a>
-          )}
-          <button
-            disabled={
-              formData.title === router.query.title &&
-              formData.author === router.query.author &&
-              formData.read === router.query.read &&
-              formData.rating === Number(router.query.rating) &&
-              formData.thoughts === router.query.thoughts
-            }
-            onClick={onClick}
-          >
-            Update
-          </button>
-          <a className="back" href="#" onClick={() => Router.push("/")}>
-            or Cancel
-          </a>
-        </form>
+          </form>
+        </div>
       </div>
+
+      <style jsx global>
+        {globalStyles}
+      </style>
     </Layout>
   );
 };

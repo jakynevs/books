@@ -29,4 +29,11 @@ export default css.global`
   .book + .book {
     margin-top: 2rem;
   }
+  .pageParent {
+    background: skyblue;
+    line-height: 20px;
+  }
+  .pageChild {
+    padding: 30px;
+  }
 `;

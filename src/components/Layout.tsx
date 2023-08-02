@@ -40,17 +40,18 @@ const Layout: React.FC<Props> = (props) => (
         font-size: 16px;
       }
 
-      button {
-        cursor: pointer;
-      }
       .layout {
         padding: 0 2rem;
       }
       button {
+        cursor: pointer;
+        height: 40px;
+        width: 80px;
+        line-height: 40px;
         background: #ececec;
+        box-sizing: border-box;
         border: 0;
-        border-radius: 0.125rem;
-        padding: 1rem 2rem;
+        vertical-align: center;
       }
 
       button + button {
@@ -74,6 +75,9 @@ const Layout: React.FC<Props> = (props) => (
 
       .back {
         margin-left: 1rem;
+      }
+      .noRating {
+        color: #ff69b4;
       }
     `}</style>
     <div className="layout">{props.children}</div>

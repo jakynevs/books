@@ -176,12 +176,6 @@ const Header: React.FC = () => {
             margin-left: auto;
           }
 
-          .right a {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-
           button {
             border: none;
             background: skyblue;

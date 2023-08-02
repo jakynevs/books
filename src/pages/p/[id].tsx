@@ -7,6 +7,7 @@ import { BookProps } from "../../components/Book";
 import { useSession } from "next-auth/react";
 import prisma from "../../../lib/prisma";
 import { Rate } from "antd";
+import globalStyles from "../../components/styles/global";
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const book = await prisma.book.findUnique({
@@ -61,35 +62,44 @@ const Book: React.FC<BookProps> = (props) => {
 
   return (
     <Layout>
-      <div>
-        <h2>{title}</h2>
-        <p>By {author || "Unknown"}</p>
-        <p>{setReadStatus(read)}</p>
-        {thoughts && <p> {thoughts}</p>}
-        {rating ? (
-          <Rate
-            count={4}
-            allowClear={true}
-            value={rating}
-            style={{ color: "#96e7f1" }}
-            disabled={true}
-          />
-        ) : null}
-        <p></p>
-        <Link
-          href={{
-            pathname: "/edit",
-            query: { id, title, author, read, rating, thoughts },
-          }}
-        >
-          <button>
-            <a>Edit</a>
-          </button>
-        </Link>
-        {userHasValidSession && (
-          <button onClick={() => deleteBook(id)}>Delete</button>
-        )}
+      <div className="pageParent">
+        <div className="pageChild">
+          <h2>{title}</h2>
+          <p>By {author || "Unknown"}</p>
+          <p>{setReadStatus(read)}</p>
+          {thoughts && <p> {thoughts}</p>}
+          {read === "READ" ? (
+            <div>
+              <Rate
+                count={4}
+                allowClear={true}
+                style={{ color: "#FF69B4" }}
+                defaultValue={0}
+                value={rating}
+              />
+            </div>
+          ) : (
+            <p className="noRating">No rating</p>
+          )}
+          <p></p>
+          <Link
+            href={{
+              pathname: "/edit",
+              query: { id, title, author, read, rating, thoughts },
+            }}
+          >
+            <button>
+              <a>Edit</a>
+            </button>
+          </Link>
+          {userHasValidSession && (
+            <button onClick={() => deleteBook(id)}>Delete</button>
+          )}
+        </div>
       </div>
+      <style jsx global>
+        {globalStyles}
+      </style>
     </Layout>
   );
 };

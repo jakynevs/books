@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Router from "next/router";
 import Layout from "../components/Layout";
 import { Rate } from "antd";
+import globalStyles from "../components/styles/global";
 
 const Create: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -56,63 +57,68 @@ const Create: React.FC = () => {
 
   return (
     <Layout>
-      <div>
-        <form onSubmit={submitData}>
-          <h1>New Book</h1>
-          <input
-            name="title"
-            autoFocus
-            onChange={handleChange}
-            placeholder="Title"
-            type="text"
-            value={formData.title}
-          />
-          <input
-            name="author"
-            autoFocus
-            onChange={handleChange}
-            placeholder="Author"
-            type="text"
-            value={formData.author}
-          />
-          <label>
-            Reading status:
-            <select name="read" value={formData.read} onChange={handleChange}>
-              <option value="READING">Reading</option>
-              <option selected value="NR">
-                Not read
-              </option>
-              <option value="READ">Read</option>
-            </select>
-          </label>
-          {isRead && (
-            <a>
-              <Rate
-                count={4}
-                allowClear={true}
-                style={{ color: "#96e7f1" }}
-                onChange={handleStarChange}
-                value={formData.rating}
-              />
-              <input
-                name="thoughts"
-                onChange={handleChange}
-                placeholder="Thoughts..."
-                type="text"
-                value={formData.thoughts}
-              />
+      <div className="pageParent">
+        <div className="pageChild">
+          <form onSubmit={submitData}>
+            <h1>New Book</h1>
+            <input
+              name="title"
+              autoFocus
+              onChange={handleChange}
+              placeholder="Title"
+              type="text"
+              value={formData.title}
+            />
+            <input
+              name="author"
+              autoFocus
+              onChange={handleChange}
+              placeholder="Author"
+              type="text"
+              value={formData.author}
+            />
+            <label>
+              Reading status:
+              <select name="read" value={formData.read} onChange={handleChange}>
+                <option value="READING">Reading</option>
+                <option selected value="NR">
+                  Not read
+                </option>
+                <option value="READ">Read</option>
+              </select>
+            </label>
+            {isRead && (
+              <a>
+                <Rate
+                  count={4}
+                  allowClear={true}
+                  style={{ color: "#FF69B4" }}
+                  onChange={handleStarChange}
+                  value={formData.rating}
+                />
+                <input
+                  name="thoughts"
+                  onChange={handleChange}
+                  placeholder="Thoughts..."
+                  type="text"
+                  value={formData.thoughts}
+                />
+              </a>
+            )}
+            <input
+              disabled={!formData.author || !formData.title}
+              type="submit"
+              value="Create"
+            />
+            <a className="back" href="#" onClick={() => Router.push("/")}>
+              or Cancel
             </a>
-          )}
-          <input
-            disabled={!formData.author || !formData.title}
-            type="submit"
-            value="Create"
-          />
-          <a className="back" href="#" onClick={() => Router.push("/")}>
-            or Cancel
-          </a>
-        </form>
+          </form>
+        </div>
       </div>
+      <style jsx global>
+        {globalStyles}
+      </style>
     </Layout>
   );
 };
