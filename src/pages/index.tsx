@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next";
 import prisma from "../../lib/prisma";
 import Library from "./library";
+import Layout from "../components/Layout";
 
 export const getStaticProps: GetStaticProps = async () => {
   const books = await prisma.book.findMany({
@@ -16,4 +17,10 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Library;
+export default function Home({ books }) {
+  return (
+    <Layout>
+      <Library books={books} />
+    </Layout>
+  );
+}
