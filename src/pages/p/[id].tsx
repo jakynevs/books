@@ -82,16 +82,19 @@ const Book: React.FC<BookProps> = (props) => {
             <p className="noRating">No rating</p>
           )}
           <p></p>
-          <Link
-            href={{
-              pathname: "/edit",
-              query: { id, title, author, read, rating, thoughts },
-            }}
+          <button
+            onClick={() =>
+              Router.push(
+                {
+                  pathname: "/edit",
+                  query: { id, title, author, read, rating, thoughts },
+                },
+                `/edit/${title}`
+              )
+            }
           >
-            <button>
-              <a>Edit</a>
-            </button>
-          </Link>
+            <a>Edit</a>
+          </button>
           {userHasValidSession && (
             <button onClick={() => deleteBook(id)}>Delete</button>
           )}
