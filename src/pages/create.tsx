@@ -105,11 +105,13 @@ const Create: React.FC = () => {
                 />
               </a>
             )}
-            <input
+
+            <button
               disabled={!formData.author || !formData.title}
               type="submit"
-              value="Create"
-            />
+            >
+              Add book
+            </button>
             <a className="back" href="#" onClick={() => Router.push("/")}>
               or Cancel
             </a>

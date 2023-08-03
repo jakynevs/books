@@ -45,13 +45,14 @@ const Layout: React.FC<Props> = (props) => (
       }
       button {
         cursor: pointer;
-        height: 40px;
+        height: 30px;
         width: 80px;
-        line-height: 40px;
+        line-height: 30px;
         background: #ececec;
         box-sizing: border-box;
         border: 0;
         vertical-align: center;
+        margin: 1rem;
       }
 
       button + button {
@@ -78,6 +79,17 @@ const Layout: React.FC<Props> = (props) => (
       }
       .noRating {
         color: #ff69b4;
+      }
+      select {
+        cursor: pointer;
+        height: 30px;
+        width: 80px;
+        line-height: 30px;
+        background: #ff69b4;
+        box-sizing: border-box;
+        border: 0;
+        vertical-align: center;
+        margin-left: 1rem;
       }
     `}</style>
     <div className="layout">{props.children}</div>
