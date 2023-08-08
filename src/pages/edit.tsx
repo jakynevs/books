@@ -6,16 +6,59 @@ import globalStyles from "../components/styles/global";
 
 const Edit: React.FC = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    id: router.query.id,
-    title: router.query.title,
-    author: router.query.author,
-    read: router.query.read,
-    rating: Number(router.query.rating),
-    thoughts: router.query.thoughts,
-  });
+  const [isNewBook, setIsNewBook] = useState(router.query.isNewBook);
+  const [pageTitle, setPageTitle] = useState(
+    isNewBook ? "Add book" : "Edit book"
+  );
+  const [formData, setFormData] = useState(
+    isNewBook
+      ? {
+          id: "",
+          title: "",
+          author: "",
+          read: "",
+          rating: null,
+          thoughts: "",
+        }
+      : {
+          id: router.query.id,
+          title: router.query.title,
+          author: router.query.author,
+          read: router.query.read,
+          rating: Number(router.query.rating),
+          thoughts: router.query.thoughts,
+        }
+  );
   const [disabled, setDisabled] = useState(true);
   const [isRead, setIsRead] = useState(() => bookRead(formData.read));
+
+  useEffect(() => {
+    if (!isNewBook && !formData.id) {
+      const getLocalFormData = window.localStorage.getItem("formValues");
+      const savedValues = JSON.parse(getLocalFormData);
+      setFormData(() => {
+        return {
+          id: savedValues.id,
+          title: savedValues.title,
+          author: savedValues.author,
+          read: savedValues.read,
+          rating: savedValues.rating,
+          thoughts: savedValues.thoughts,
+        };
+      });
+      setIsRead(savedValues.read);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("formValues", JSON.stringify(formData));
+    window.localStorage.setItem("isRead", JSON.stringify(isRead));
+    window.localStorage.setItem(
+      "isNewBook",
+      JSON.stringify(router.query.isNewBook)
+    );
+    Layout;
+  });
 
   const onClick = () => {
     setDisabled(true);
@@ -41,29 +84,6 @@ const Edit: React.FC = () => {
       };
     });
   }
-
-  useEffect(() => {
-    if (!formData.id) {
-      const getLocalFormData = window.localStorage.getItem("formValues");
-      const savedValues = JSON.parse(getLocalFormData);
-      setFormData(() => {
-        return {
-          id: savedValues.id,
-          title: savedValues.title,
-          author: savedValues.author,
-          read: savedValues.read,
-          rating: savedValues.rating,
-          thoughts: savedValues.thoughts,
-        };
-      });
-      setIsRead(savedValues.read);
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("formValues", JSON.stringify(formData));
-    window.localStorage.setItem("isRead", JSON.stringify(isRead));
-  });
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -91,7 +111,7 @@ const Edit: React.FC = () => {
       <div className="pageParent">
         <div className="pageChild">
           <form onSubmit={submitData}>
-            <h1>Edit Book</h1>
+            <h1> {pageTitle}</h1>
             <input
               name="title"
               autoFocus

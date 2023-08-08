@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { GetServerSideProps } from "next";
 import Router from "next/router";
 import Layout from "../../components/Layout";
@@ -89,7 +88,7 @@ const Book: React.FC<BookProps> = (props) => {
                   pathname: "/edit",
                   query: { id, title, author, read, rating, thoughts },
                 },
-                `/edit/${title}`
+                `/edit/`
               )
             }
           >

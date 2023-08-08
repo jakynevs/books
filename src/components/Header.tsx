@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
@@ -147,11 +147,16 @@ const Header: React.FC = () => {
         <p>
           {session.user.name} ({session.user.email})
         </p>
-        <Link href="/create">
-          <button>
-            <a>Add book</a>
-          </button>
-        </Link>
+        <button
+          onClick={() =>
+            router.push({
+              pathname: "/edit",
+              query: { isNewBook: true },
+            })
+          }
+        >
+          <a>Add book</a>
+        </button>
         <button onClick={() => signOut()}>
           <a>Log out</a>
         </button>
