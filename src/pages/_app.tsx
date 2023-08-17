@@ -3,7 +3,7 @@ import { AppProps } from "next/app";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider>
       <Component {...pageProps} />
     </SessionProvider>
   );

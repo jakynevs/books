@@ -1,5 +1,5 @@
 import React from "react";
-import Book, { BookProps } from "../components/Book";
+import Book, { BookProps } from "./Book";
 
 type Props = {
   books: BookProps[];

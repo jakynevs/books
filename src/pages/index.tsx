@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import prisma from "../../lib/prisma";
-import Library from "./library";
+import Library from "../components/library";
 import Layout from "../components/Layout";
 
 export const getStaticProps: GetStaticProps = async () => {
