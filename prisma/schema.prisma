@@ -13,7 +13,7 @@ model Book {
   title     String
   author    String?
   thoughts  String?
-  read      Read      @default(NR)
+  read      Read?     @default(NR)
   user      User?     @relation(fields:[userId], references:[id])
   userId    String?
   rating    Float?

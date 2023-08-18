@@ -89,17 +89,20 @@ const Edit: React.FC = () => {
     e.preventDefault();
     setDisabled(true);
     const id = formData.id;
-    try {
-      await fetch(`api/book/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      window.localStorage.removeItem("formValues");
-      await Router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+
+    isNewBook
+      ? await fetch("api/book", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        })
+      : await fetch(`api/book/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+    window.localStorage.removeItem("formValues");
+    await Router.push("/");
   };
 
   function bookRead(read) {
@@ -165,9 +168,9 @@ const Edit: React.FC = () => {
                 formData.rating === Number(router.query.rating) &&
                 formData.thoughts === router.query.thoughts
               }
-              onClick={onClick}
+              onClick={submitData}
             >
-              Update
+              {isNewBook ? "Create" : "Update"}
             </button>
             <a className="back" href="#" onClick={() => Router.push("/")}>
               or Cancel

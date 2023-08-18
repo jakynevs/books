@@ -2,6 +2,7 @@ import React from "react";
 import Router from "next/router";
 import { Rate } from "antd";
 import globalStyles from "../components/styles/global";
+import { useSession } from "next-auth/react";
 
 export type BookProps = {
   id: string;
@@ -16,9 +17,12 @@ export type BookProps = {
 };
 
 const Book: React.FC<{ book: BookProps }> = ({ book }) => {
-  const userName = book.user ? book.user.name : "Unknown";
+  const { data: session } = useSession();
+  const handleClick = () => {
+    Router.push("/p/[id]", `/p/${book.id}`);
+  };
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${book.id}`)}>
+    <div onClick={session && handleClick}>
       <h2>{book.title}</h2>
       <p>By {book.author}</p>
       {book.read === "READ" ? (
