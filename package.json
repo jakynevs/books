@@ -1,7 +1,7 @@
 {
   "name": "hello-next",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app is based on a fullstack tutorial with Next.js and Prisma. You can find the final version of that project [`here`](https://github.com/prisma/blogr-nextjs-prisma/tree/final).",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -9,12 +9,12 @@
     "postinstall": "prisma generate"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jack Neville",
   "license": "MIT",
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "@next-auth/prisma-adapter": "^1.0.5",
-    "@prisma/client": "^4.11.0",
+    "@prisma/client": "^5.4.1",
     "antd": "^5.8.3",
     "next": "^12.2.5",
     "next-auth": "^4.20.1",
@@ -29,7 +29,19 @@
   "devDependencies": {
     "@types/node": "17.0.14",
     "@types/react": "17.0.38",
-    "prisma": "^4.14.1",
+    "prisma": "^5.4.1",
     "typescript": "^4.7.4"
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakynevs/books.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jakynevs/books/issues"
+  },
+  "homepage": "https://github.com/jakynevs/books#readme"
 }
