@@ -16,4 +16,10 @@ const options = {
   ],
   adapter: PrismaAdapter(prisma),
   secret: process.env.SECRET,
+  callbacks: {
+    async session({session, user}) {
+      session.userId = user.id as string;
+      return session;
+    }
+  }
 };
