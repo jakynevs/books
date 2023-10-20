@@ -3,7 +3,7 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <footer>
-      {process.env.NEXT_PUBLIC_ENV}
+      Environment: {process.env.NEXT_PUBLIC_ENV}
       <style jsx>
         {`
           footer {
