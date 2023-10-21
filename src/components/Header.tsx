@@ -20,15 +20,15 @@ const Header: React.FC = () => {
         .bold {
           font-weight: bold;
         }
-
+        .left a[data-active="true"] {
+          color: skyblue;
+          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000;
+        }
         a {
           text-decoration: none;
           color: var(--geist-foreground);
           display: inline-block;
-        }
-
-        .left a[data-active="true"] {
-          color: gray;
         }
 
         a + a {
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
           }
 
           .left a[data-active="true"] {
-            color: gray;
+            color: skyblue;
           }
 
           a + a {
@@ -133,7 +133,9 @@ const Header: React.FC = () => {
           }
 
           .left a[data-active="true"] {
-            color: gray;
+            color: skyblue;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+              1px 1px 0 #000;
           }
 
           a + a {
@@ -144,9 +146,7 @@ const Header: React.FC = () => {
     );
     right = (
       <div className="right">
-        <p>
-          {session.user.name} ({session.user.email})
-        </p>
+        <p>{session.user.name}</p>
         <button
           onClick={() =>
             router.push({
@@ -182,7 +182,6 @@ const Header: React.FC = () => {
           }
 
           button {
-            border: none;
             background: skyblue;
             border: 12;
             border-radius: 0.125rem;
@@ -202,10 +201,50 @@ const Header: React.FC = () => {
       {left}
       {right}
       <style jsx>{`
+        a {
+          text-decoration: none;
+          color: var(--geist-foreground);
+          display: inline-block;
+        }
+
+        a + a {
+          margin-left: 1rem;
+        }
+        p {
+          display: inline-block;
+          font-size: 13px;
+          padding-right: 1rem;
+        }
+        .bold {
+          font-weight: bold;
+        }
+
+        .left a[data-active="true"],
+        .right a[data-active="true"] {
+          color: skyblue;
+          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000;
+        }
+
         nav {
           display: flex;
           padding: 2rem;
           align-items: center;
+        }
+
+        .right {
+          margin-left: auto;
+        }
+
+        button {
+          border: 12;
+          background: skyblue;
+          border-radius: 0.125rem;
+          padding: 0;
+        }
+
+        button + button {
+          margin-left: 1rem;
         }
       `}</style>
     </nav>
