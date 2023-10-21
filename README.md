@@ -1,17 +1,21 @@
-Book Repository App 📚
-Overview
+# Book Repository App 📚
+
+## Overview
+
 The Book Repository App is a digital platform for managing and cataloguing books. This tool helps you keep track of your book collection with ease.
 
-Features
-Book Management: Add, edit, or delete book entries.
-User Profiles: Login through github auth to add and edit books to your library.
-Reviews & Ratings: Share your thoughts on a book.
+## Features
 
-Tech Stack
-Frontend: React, Next.js
-Backend: Next.js API routes
-Authentication: NextAuth
-Database: Vercel Postgres with Prisma ORM
-Deployment: Vercel
+- **Book Management**: Add, edit, or delete book entries.
+- **User Profiles**: Login through GitHub auth to add and edit books to your library.
+- **Reviews & Ratings**: Share your thoughts on a book.
 
-Check out the app. here: https://books-jakynevs.vercel.app/
+## Tech Stack
+
+- **Frontend**: React, Next.js
+- **Backend**: Next.js API routes
+- **Authentication**: NextAuth
+- **Database**: Vercel Postgres with Prisma ORM
+- **Deployment**: Vercel
+
+[Check out the app here.](https://books-jakynevs.vercel.app/)
