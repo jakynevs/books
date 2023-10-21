@@ -1,4 +1,17 @@
-# Fullstack Authentication Example with Next.js and NextAuth.js
+Book Repository App 📚
+Overview
+The Book Repository App is a digital platform for managing and cataloguing books. This tool helps you keep track of your book collection with ease.
 
-This app is based on a fullstack tutorial with Next.js and Prisma. You can find the final version of that project [`here`](https://github.com/prisma/blogr-nextjs-prisma/tree/final).
+Features
+Book Management: Add, edit, or delete book entries.
+User Profiles: Login through github auth to add and edit books to your library.
+Reviews & Ratings: Share your thoughts on a book.
 
+Tech Stack
+Frontend: React, Next.js
+Backend: Next.js API routes
+Authentication: NextAuth
+Database: Vercel Postgres with Prisma ORM
+Deployment: Vercel
+
+Check out the app. here: https://books-jakynevs.vercel.app/
