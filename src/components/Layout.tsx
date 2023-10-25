@@ -68,11 +68,9 @@ const Layout: React.FC<Props> = (props) => (
           box-sizing: border-box;
           border: 0;
           vertical-align: center;
-          margin: 1rem;
         }
 
         button + button {
-          margin-left: 1rem;
         }
 
         input[type="text"],

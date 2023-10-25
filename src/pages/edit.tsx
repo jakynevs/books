@@ -5,24 +5,21 @@ import { Rate } from "antd";
 import globalStyles from "../components/styles/global";
 import { getSession } from "next-auth/react";
 
-
 const Edit: React.FC = () => {
   const router = useRouter();
   const [isNewBook, setIsNewBook] = useState(router.query.isNewBook);
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(null);
   const [pageTitle, setPageTitle] = useState(
     isNewBook ? "Add book" : "Edit book"
   );
 
-useEffect(() => {
-  const fetchData = async () => {
-
-    const session = await getSession();
-    setUserId(session?.userId)
-  };
-  fetchData();
-}, []);
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const session = await getSession();
+      setUserId(session?.userId);
+    };
+    fetchData();
+  }, []);
 
   const [formData, setFormData] = useState(
     isNewBook
@@ -105,14 +102,13 @@ useEffect(() => {
     setDisabled(true);
     const id = formData.id;
     const bodyData = { ...formData, userId: userId };
-    
+
     isNewBook
       ? await fetch("api/book", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(bodyData),
         })
-        
       : await fetch(`api/book/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

@@ -13,7 +13,7 @@ const Header: React.FC = () => {
     <div className="left">
       <Link href="/">
         <a className="bold" data-active={isActive("/")}>
-          Library
+          Welcome to Jak's Books
         </a>
       </Link>
       <style jsx>{`
@@ -24,6 +24,7 @@ const Header: React.FC = () => {
           color: skyblue;
           text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
             1px 1px 0 #000;
+          font-size: 30px;
         }
         a {
           text-decoration: none;
@@ -49,10 +50,6 @@ const Header: React.FC = () => {
           </a>
         </Link>
         <style jsx>{`
-          .bold {
-            font-weight: bold;
-          }
-
           a {
             text-decoration: none;
             color: var(--geist-foreground);
@@ -61,6 +58,9 @@ const Header: React.FC = () => {
 
           .left a[data-active="true"] {
             color: skyblue;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+              1px 1px 0 #000;
+            font-size: 30px;
           }
 
           a + a {
@@ -95,11 +95,16 @@ const Header: React.FC = () => {
           }
 
           a + a {
-            margin-left: 1rem;
+            margin-left: 0.5rem;
           }
 
           .right {
+            font-weight: bold;
             margin-left: auto;
+            color: skyblue;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+              1px 1px 0 #000;
+            font-size: 26px;
           }
 
           .right a {
@@ -122,24 +127,16 @@ const Header: React.FC = () => {
         </Link>
 
         <style jsx>{`
-          .bold {
-            font-weight: bold;
-          }
-
           a {
             text-decoration: none;
             color: var(--geist-foreground);
             display: inline-block;
           }
 
-          .left a[data-active="true"] {
+          .left {
             color: skyblue;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
               1px 1px 0 #000;
-          }
-
-          a + a {
-            margin-left: 1rem;
           }
         `}</style>
       </div>
@@ -148,6 +145,7 @@ const Header: React.FC = () => {
       <div className="right">
         <p>{session.user.name}</p>
         <button
+          className="rightButton"
           onClick={() =>
             router.push({
               pathname: "/edit",
@@ -157,24 +155,24 @@ const Header: React.FC = () => {
         >
           <a>Add book</a>
         </button>
-        <button onClick={() => signOut()}>
+        <button className="rightButton" onClick={() => signOut()}>
           <a>Log out</a>
         </button>
         <style jsx>{`
           a {
             text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
+            color: skyblue;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+              1px 1px 0 #000;
           }
 
           p {
             display: inline-block;
             font-size: 13px;
-            padding-right: 1rem;
+            margin-right: 16px;
           }
 
-          a + a {
-            margin-left: 1rem;
+          .rightButton {
           }
 
           .right {
@@ -182,14 +180,7 @@ const Header: React.FC = () => {
           }
 
           button {
-            background: skyblue;
-            border: 12;
-            border-radius: 0.125rem;
-            padding: 0;
-          }
-
-          button + button {
-            margin-left: 1rem;
+            background: pink;
           }
         `}</style>
       </div>
@@ -201,50 +192,10 @@ const Header: React.FC = () => {
       {left}
       {right}
       <style jsx>{`
-        a {
-          text-decoration: none;
-          color: var(--geist-foreground);
-          display: inline-block;
-        }
-
-        a + a {
-          margin-left: 1rem;
-        }
-        p {
-          display: inline-block;
-          font-size: 13px;
-          padding-right: 1rem;
-        }
-        .bold {
-          font-weight: bold;
-        }
-
-        .left a[data-active="true"],
-        .right a[data-active="true"] {
-          color: skyblue;
-          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-            1px 1px 0 #000;
-        }
-
         nav {
           display: flex;
           padding: 2rem;
           align-items: center;
-        }
-
-        .right {
-          margin-left: auto;
-        }
-
-        button {
-          border: 12;
-          background: skyblue;
-          border-radius: 0.125rem;
-          padding: 0;
-        }
-
-        button + button {
-          margin-left: 1rem;
         }
       `}</style>
     </nav>
