@@ -63,6 +63,20 @@ const Edit: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (router.query.isNewBook) {
+      // Reset the form data to its initial state
+      setFormData({
+        id: "",
+        title: "",
+        author: "",
+        read: "",
+        rating: null,
+        thoughts: "",
+      });
+    }
+  }, [router.query.isNewBook]);
+
+  useEffect(() => {
     window.localStorage.setItem("formValues", JSON.stringify(formData));
     window.localStorage.setItem("isRead", JSON.stringify(isRead));
     window.localStorage.setItem(
@@ -146,7 +160,12 @@ const Edit: React.FC = () => {
             />
             <label>
               Reading status:
-              <select name="read" value={formData.read} onChange={handleChange}>
+              <select
+                className="dropDown"
+                name="read"
+                value={formData.read}
+                onChange={handleChange}
+              >
                 <option value="READING">Reading</option>
                 <option selected value="NR">
                   Yet to read
