@@ -95,7 +95,9 @@ const Book: React.FC<BookProps> = (props) => {
             <a>Edit</a>
           </button>
           {userHasValidSession && (
-            <button onClick={() => deleteBook(id)}>Delete</button>
+            <button onClick={() => deleteBook(id)}>
+              <a>Delete</a>
+            </button>
           )}
         </div>
       </div>

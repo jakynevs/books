@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import global from "./styles/global";
 
 type Props = {
   children: ReactNode;
@@ -10,8 +11,10 @@ const Layout: React.FC<Props> = (props) => (
   <div>
     <Header />
     <div className="site">
-      <style jsx global>{`
-        html,
+      <style jsx global>
+        {global}
+      </style>
+      <style jsx>{`
         body {
           height: 100%;
           margin: 0;
@@ -64,13 +67,8 @@ const Layout: React.FC<Props> = (props) => (
           height: 30px;
           width: 80px;
           line-height: 30px;
-          background: #ececec;
-          box-sizing: border-box;
           border: 0;
           vertical-align: center;
-        }
-
-        button + button {
         }
 
         input[type="text"],

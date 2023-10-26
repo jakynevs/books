@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
@@ -9,195 +9,41 @@ const Header: React.FC = () => {
     router.pathname === pathname;
   const { data: session, status } = useSession();
 
-  let left = (
-    <div className="left">
-      <Link href="/">
-        <a className="bold" data-active={isActive("/")}>
-          Welcome to Jak's Books
-        </a>
-      </Link>
-      <style jsx>{`
-        .bold {
-          font-weight: bold;
-        }
-        .left a[data-active="true"] {
-          color: skyblue;
-          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-            1px 1px 0 #000;
-          font-size: 30px;
-        }
-        a {
-          text-decoration: none;
-          color: var(--geist-foreground);
-          display: inline-block;
-        }
-
-        a + a {
-          margin-left: 1rem;
-        }
-      `}</style>
-    </div>
+  const leftContent = session ? (
+    <p>{session.user.name}'s Library </p>
+  ) : (
+    <p>Welcome to Jak's Books</p>
   );
 
   let right = null;
-
-  if (status === "loading") {
-    left = (
-      <div className="left">
-        <Link href="/">
-          <a className="bold" data-active={isActive("/")}>
-            Library
-          </a>
-        </Link>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          .left a[data-active="true"] {
-            color: skyblue;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-              1px 1px 0 #000;
-            font-size: 30px;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-        `}</style>
-      </div>
-    );
-    right = (
-      <div className="right">
-        <p>Validating session ...</p>
-        <style jsx>{`
-          .right {
-            margin-left: auto;
-          }
-        `}</style>
-      </div>
-    );
-  }
-
-  if (!session) {
-    right = (
-      <div className="right">
-        <Link href="/api/auth/signin">
-          <a data-active={isActive("/signup")}>Log in for functionality</a>
-        </Link>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          a + a {
-            margin-left: 0.5rem;
-          }
-
-          .right {
-            font-weight: bold;
-            margin-left: auto;
-            color: skyblue;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-              1px 1px 0 #000;
-            font-size: 26px;
-          }
-
-          .right a {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-        `}</style>
-      </div>
-    );
-  }
-
   if (session) {
-    left = (
-      <div className="left">
-        <Link href="/">
-          <a className="bold" data-active={isActive("/")}>
-            Library
-          </a>
-        </Link>
-
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          .left {
-            color: skyblue;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-              1px 1px 0 #000;
-          }
-        `}</style>
-      </div>
-    );
     right = (
-      <div className="right">
-        <p>{session.user.name}</p>
+      <div className="rightItems">
         <button
-          className="rightButton"
+          className="headerButton"
           onClick={() =>
-            router.push({
-              pathname: "/edit",
-              query: { isNewBook: true },
-            })
+            router.push({ pathname: "/edit", query: { isNewBook: true } })
           }
         >
-          <a>Add book</a>
+          Add book
         </button>
-        <button className="rightButton" onClick={() => signOut()}>
-          <a>Log out</a>
+        <button className="headerButton" onClick={() => signOut()}>
+          Log out
         </button>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: skyblue;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-              1px 1px 0 #000;
-          }
-
-          p {
-            display: inline-block;
-            font-size: 13px;
-            margin-right: 16px;
-          }
-
-          .rightButton {
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          button {
-            background: pink;
-          }
-        `}</style>
       </div>
     );
   }
 
   return (
     <nav>
-      {left}
-      {right}
-      <style jsx>{`
-        nav {
-          display: flex;
-          padding: 2rem;
-          align-items: center;
-        }
-      `}</style>
+      <div className="left">
+        <Link href="/">
+          <a className="headerButton" data-active={isActive("/")}>
+            {leftContent}
+          </a>
+        </Link>
+      </div>
+      <div className="right">{right}</div>
     </nav>
   );
 };

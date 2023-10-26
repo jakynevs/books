@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import { Rate } from "antd";
-import globalStyles from "../components/styles/global";
+import globalStyles from "./styles/global";
 import { useSession } from "next-auth/react";
 
 export type BookProps = {
