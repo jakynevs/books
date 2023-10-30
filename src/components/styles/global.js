@@ -10,6 +10,7 @@ export default css.global`
   }
   h1 {
     font-weight: 700;
+    font-size: 20px;
   }
   p {
     margin-bottom: 10px;
@@ -106,5 +107,20 @@ export default css.global`
       Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol";
     background: pink;
+  }
+  input,
+  textarea {
+    font-size: 16px;
+  }
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border-radius: 0.25rem;
+    border: 0.125rem solid rgba(0, 0, 0, 0.2);
+  }
+  .layout {
+    padding: 0 2rem;
   }
 `;
